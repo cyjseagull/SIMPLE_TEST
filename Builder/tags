@@ -1,0 +1,66 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AddFrame	Product.cpp	/^void Page::AddFrame(Frame *componet)$/;"	f	class:Page
+BuildButton	Builder.cpp	/^void GeneralControlBuilder::BuildButton()$/;"	f	class:GeneralControlBuilder
+BuildButton	Builder.h	/^		virtual void BuildButton(){$/;"	f	class:ControlBuilder
+BuildMenu	Builder.cpp	/^void  GeneralControlBuilder::BuildMenu()$/;"	f	class:GeneralControlBuilder
+BuildMenu	Builder.h	/^		virtual void BuildMenu(){$/;"	f	class:ControlBuilder
+BuildPage	Builder.cpp	/^void GeneralControlBuilder::BuildPage()$/;"	f	class:GeneralControlBuilder
+BuildPage	Builder.h	/^		virtual void BuildPage(){$/;"	f	class:ControlBuilder
+BuildTitle	Builder.cpp	/^void GeneralControlBuilder::BuildTitle()$/;"	f	class:GeneralControlBuilder
+BuildTitle	Builder.h	/^		virtual void BuildTitle()$/;"	f	class:ControlBuilder
+BuildToolBar	Builder.cpp	/^void GeneralControlBuilder::BuildToolBar()$/;"	f	class:GeneralControlBuilder
+BuildToolBar	Builder.h	/^		virtual void BuildToolBar(){$/;"	f	class:ControlBuilder
+Button	Product.h	/^class Button:public Frame$/;"	c
+CellToolBar	Product.h	/^class CellToolBar:public ToolBar$/;"	c
+ControlBuilder	Builder.h	/^class ControlBuilder$/;"	c
+CreatePage	Director.h	/^		virtual Page *CreatePage()$/;"	f	class:PageDirector
+FloatToolBar	Product.h	/^class FloatToolBar:public ToolBar$/;"	c
+Frame	Product.h	/^class Frame$/;"	c
+GeneralControlBuilder	Builder.h	/^class GeneralControlBuilder:public ControlBuilder$/;"	c
+GetFrameNum	Product.cpp	/^uint64_t Page::GetFrameNum()$/;"	f	class:Page
+GetPage	Builder.cpp	/^Page *GeneralControlBuilder::GetPage()$/;"	f	class:GeneralControlBuilder
+GetPage	Builder.h	/^		virtual Page* GetPage(){$/;"	f	class:ControlBuilder
+ImageButton	Product.h	/^class ImageButton:public Button$/;"	c
+ImageTitle	Product.h	/^class ImageTitle:public Title$/;"	c
+ListMenu	Product.h	/^class ListMenu:public Menu$/;"	c
+Menu	Product.h	/^class Menu:public Frame$/;"	c
+Page	Product.cpp	/^Page::Page()$/;"	f	class:Page
+Page	Product.h	/^class Page:public Frame$/;"	c
+PageDirector	Director.h	/^		PageDirector(){$/;"	f	class:PageDirector
+PageDirector	Director.h	/^class PageDirector$/;"	c
+RemoveFrame	Product.cpp	/^void Page::RemoveFrame(Frame *componet)$/;"	f	class:Page
+SlidePage	Product.h	/^class SlidePage:public Page$/;"	c
+TextButton	Product.h	/^class TextButton:public Button$/;"	c
+TextTitle	Product.h	/^class TextTitle:public Title$/;"	c
+ThreeButton	Product.h	/^class ThreeButton:public Button$/;"	c
+ThreeMenu	Product.h	/^class ThreeMenu:public Menu$/;"	c
+Title	Product.h	/^class Title:public Frame$/;"	c
+ToolBar	Product.h	/^class ToolBar:public Frame$/;"	c
+_BUILDER_H_	Builder.h	10;"	d
+_DIRECTOR_H_	Director.h	10;"	d
+_PRODUCT_H_	Product.h	11;"	d
+draw	Product.cpp	/^void Page::draw()$/;"	f	class:Page
+draw	Product.h	/^		virtual void draw()$/;"	f	class:CellToolBar
+draw	Product.h	/^		virtual void draw()$/;"	f	class:FloatToolBar
+draw	Product.h	/^		virtual void draw()$/;"	f	class:ImageButton
+draw	Product.h	/^		virtual void draw()$/;"	f	class:ImageTitle
+draw	Product.h	/^		virtual void draw()$/;"	f	class:ListMenu
+draw	Product.h	/^		virtual void draw()$/;"	f	class:Menu
+draw	Product.h	/^		virtual void draw()$/;"	f	class:SlidePage
+draw	Product.h	/^		virtual void draw()$/;"	f	class:TextButton
+draw	Product.h	/^		virtual void draw()$/;"	f	class:TextTitle
+draw	Product.h	/^		virtual void draw()$/;"	f	class:ThreeButton
+draw	Product.h	/^		virtual void draw()$/;"	f	class:ThreeMenu
+draw	Product.h	/^		virtual void draw()$/;"	f	class:Title
+draw	Product.h	/^		virtual void draw()$/;"	f	class:ToolBar
+draw	Product.h	/^		virtual void draw(){$/;"	f	class:Button
+frameList	Product.h	/^		std::list<Frame *> frameList;$/;"	m	class:Page
+m_builder	Director.h	/^		ControlBuilder *m_builder;$/;"	m	class:PageDirector
+main	main.cpp	/^int main()$/;"	f
+thisPage	Builder.h	/^		Page* thisPage;$/;"	m	class:GeneralControlBuilder
+~Page	Product.cpp	/^Page::~Page()$/;"	f	class:Page
