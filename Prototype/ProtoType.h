@@ -8,34 +8,23 @@
  ************************************************************************/
 #ifndef _PROTOTYPE_INTERFACE_H_
 #define _PROTOTYPE_INTERFACE_H_
+#include "stdlib.h"
+#include "string.h"
+#include "stdio.h"
+#include <iostream>
+using namespace std;
 
 //interface of prototype
 class PrototypeInterface
 {
 	public:
 
-		virtual PrototypeInterface(){
+		 PrototypeInterface();
 
-		}
+		virtual ~PrototypeInterface(){}
 
-		virtual ~PrototypeInterface(){
-			
-		}
-
-		virtual PrototypeInterface *Clone(){
-
-		}
-		
-		virtual void SetName(char *name){
-
-		}
-		
-		virtual void Show(){
-
-		}
-
-	protected:
-		char *name;
+		virtual PrototypeInterface *Clone(){}		
+		virtual void Show(){}
 };
 
 
@@ -43,17 +32,25 @@ class ConcretePrototype: public PrototypeInterface
 {
 	public:
 		//constructor
-		ConcretePrototype( char *name);
+		ConcretePrototype(char *name);
 		//copy constructor
-		ConcretPrototype( const ConcretPrototype &r);
-		~ConcretPrototype();
+		ConcretePrototype(const ConcretePrototype &r);
+		~ConcretePrototype(){
+			if(name)
+			{	
+  				delete name;
+				name = NULL;
+			}
+		}
+
 		//clone
 		ConcretePrototype* Clone();
 
-		void show();
+		void Show();
 
+	protected:
+		char *name;
 };
-
 
 #endif
 
