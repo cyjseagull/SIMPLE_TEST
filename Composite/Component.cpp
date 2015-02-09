@@ -32,36 +32,68 @@ bool MenuComposite::Add ( MenuComponent* menu)
 {
 //	cout<<"push children"<<endl;
 	children.push_back(menu);
+	
 	menu->parent = this;
 	cout<<this->GetName()<<"'s child size:"<<this->children.size()<<endl;
 	return true;
 }
 
-bool MenuComposite::Remove( char *name ,MenuComponent* &child)
+bool MenuComposite::Remove(char *name,std::list<MenuComponent *> &children_list)
 {
 	std::list<MenuComponent *>::iterator it;
-	bool rv = false;
-	for(it=children.begin(); it!=children.end();it++)
-	{		
-		if( !strcmp((*it)->GetName(),name))
+	if( !children_list.empty() )
+	{
+		for( it = children_list.begin();it!=children_list.end();it++)
 		{	
-		//	cout<<(*it)->GetName()<<endl;
-			child = *it;
-		//	children.erase(it);
-			rv =true;
-			break;
+			if(!strcmp( name, (*it)->GetName()))
+			{
+				cout<<"name:"<<name<<endl;
+				children_list.erase(it);
+				break;
+			}
 		}
 	}
+}
+
+bool MenuComposite::Remove(MenuComponent* current_node, char *name ,MenuComponent* &child)
+{
+	std::list<MenuComponent *>::iterator it;
+
+	std::list<MenuComponent *>::iterator it2;
+	bool rv = false;	
+	if(!strcmp(current_node->GetName(),name))
+	{
+		cout<<"found it"<<endl;
+		
+		cout<<"child->name:"<<current_node->GetName()<<endl;
+		child = current_node;	
+		cout<<"parent:"<<current_node->parent->GetName()<<endl;
+		rv = true;
+	}
+
+	if (!rv)
+	{
+		for(it= current_node->children.begin(); it!= current_node->children.end();it++)
+		{		
+			Remove(*it,name,child);
+		}
+	}
+	if(rv&& (it ==current_node->children.end()))
+	return rv;
+
 	return rv;
 }
 
-bool MenuComposite::DeleteChild(char *name)
+
+
+
+bool MenuComposite::DeleteChild(MenuComponent *node,char *name)
 {
 	bool rv = false;
 	MenuComponent *child=NULL;
 	std::list<MenuComponent *>::iterator it;
 	
-	if(Remove(name,child))
+	if(Remove(node,name,child))
 	{	
 		if( !(child->children.empty()) )
 		{
@@ -70,10 +102,16 @@ bool MenuComposite::DeleteChild(char *name)
 				(*it)->parent= child->parent;
 				child->parent->children.push_back(*it);
 			}
-			delete child;
-			rv = true;
-		}
-	}
+		}	
+		cout<<"parent children num:"<<child->parent->children.size()<<endl;
+		child->parent->children.remove(child);
+		
+		cout<<"parent children num2:"<<child->parent->children.size()<<endl;
+		
+		delete child;	
+		rv = true;
+}
+	cout<<"oh no!"<<endl;
 	return rv;
 }
 
@@ -106,7 +144,7 @@ void MenuComposite::DisplayOperation(int depth)
 	std::list<MenuComponent *>::iterator it;
 	for(it=children.begin();it!=children.end();it++)
 	{
-		(*it)->DisplayOperation(depth+2);	
+		(*it)->DisplayOperation(depth+4);	
 	}
 
 }

@@ -49,9 +49,9 @@ class MenuComponent
 		}
 		virtual bool Add(MenuComponent *name){
 		}
-		virtual bool Remove(char *name,MenuComponent * & ){
+		virtual bool Remove(MenuComponent *current_node,char *name,MenuComponent* & ){
 		}
-		virtual bool DeleteChild(char *name){
+		virtual bool DeleteChild(MenuComponent *node,char *name){
 
 		}
 		virtual char* GetName()
@@ -87,9 +87,22 @@ class MenuComponent
 			}
 		}
 	
+		virtual void SetObject(MenuComponent *tmp)
+		{
+			this_object = tmp;
+		}
+
+
+		virtual MenuComponent* GetObject()
+		{
+			return this_object;
+		}
+
 		MenuComponent *parent;
 		std::list<MenuComponent *> children;
 	private:
+
+		MenuComponent* this_object;
 		char *name;
 		char *url;
 };
@@ -102,15 +115,15 @@ class MenuComposite:public MenuComponent
 	    virtual	~MenuComposite();
 		virtual void DisplayOperation(int depth);
 		virtual bool Add(MenuComponent *menu);
-		virtual bool Remove(char *name, MenuComponent* &);
-		virtual bool DeleteChild(char *name);
+		virtual bool Remove(MenuComponent *current_node,char *name, MenuComponent* &);
+		virtual bool Remove(char *name, std::list<MenuComponent*> &);
+		virtual bool DeleteChild(MenuComponent *node,char *name);
 		virtual bool GetChildren(std::list<MenuComponent*>& children);
 		virtual bool SetChidren(std::list<MenuComponent *> children);
-		virtual bool SearchChild(MenuComponent *des_child ,char *name);
-
-	private:
-		std::list<MenuComponent *> children;
-		MenuComponent *parent;
+		virtual bool SearchChild(MenuComponent *des_child ,char *name);	
+	
+	
+	
 };
 
 

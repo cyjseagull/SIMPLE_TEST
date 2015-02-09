@@ -40,7 +40,7 @@ int main()
 
 	root->DisplayOperation(0);
 
-	root->DeleteChild((char *)"root_1");
+	root->DeleteChild(root,(char *)"root_1_1");
 	
 	cout<<endl;
 	root->DisplayOperation(0);
