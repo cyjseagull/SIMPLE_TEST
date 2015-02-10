@@ -1,0 +1,2 @@
+Facade design pattern:
+abstract interfaces(functions) from many kinds of classes to provide common interfaces.
