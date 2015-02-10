@@ -1,0 +1,3 @@
+TemplateMethod() describes frame of a kind of complementation;
+
+when need a class to complete the similar task,but the details are different,we only neeed to overload Operation1() and Operation2(), it's not necessary to overwrite TemplateMethod() 
