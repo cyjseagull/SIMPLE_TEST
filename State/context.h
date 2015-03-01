@@ -11,83 +11,25 @@
 #define _CONTEXT_H_
 
 #include <iostream>
-#include "state.h"
 #include "string.h"
 #include "stdlib.h"
 #include <typeinfo>
+#include "state.h"
 using namespace std;
-
+class States;
 class Account
 {
-	public:
-		Account(char *owner)
-		{
-			int len = strlen(owner);
-			this->owner = new char[len];
-			if(this->owner)
-			{
-				memcpy(this->owner,owner,len);
-				this->owner[len]='\0';
-			}	
-
-		}
-
-		~Account()
-		{
-			if(owner)
-			{
-				delete owner;
-				owner = NULL;
-			}
-			if(state)
-			{
-				delete state;
-				state = NULL;
-			}
-		}
-
-		State* GetState()
-		{
-			return this->state;
-		}
-
-		void Withdraw(double amount)
-		{
-			state->Withdraw(amount);
-			cout<<"==============================================="<<endl;
-			cout<<"="<<owner<<" withdraw "<<amount<<endl;
-			cout<<"="<<owner<<"balance = "<<state->GetBalance()<<endl;
-			cout<<"="<<owner<<" status= " <<typeid(state).name()<<endl;
-			cout<<"==============================================="<<endl;
-		}
-
-		void Deposit(double amount)
-		{
-			state->Deposit(amount);
-			cout<<"==============================================="<<endl;
-			cout<<"="<<owner<<" deposit "<<amount<<endl;
-			cout<<"="<<owner<<"balance = "<<state->GetBalance()<<endl;
-			cout<<"="<<owner<<" status= "<<typeid(state).name()<<endl;
-			cout<<"==============================================="<<endl;
-		}
-
-		void PayInterest()
-		{
-			state->PayInterest();
-			cout<<"==============================================="<<endl;
-			cout<<"="<<owner<<" interest paid "<<endl;
-			cout<<"="<<owner<<"balance = "<<state->GetBalance()<<endl;
-			cout<<"="<<owner<<" status= "<<typeid(state).name()<<endl;
-			cout<<"==============================================="<<endl;
-		}
-
-		void SetState(State *state)
-		{
-			this->state = state;
-		}
-	
-	private:
+	private:	
+		States *state;
 		char *owner;
-		State *state;
+	public:
+		Account(char *owner);
+	//	Account(char *owner,States* curState);
+		~Account();
+		States* GetState();
+		void Withdraw(double amount);
+		void Deposit(double amount);
+		void PayInterest();
+		void SetState(States *state);
 };
 #endif

@@ -7,192 +7,112 @@
     > Para:
 	> classes: State,GoldState,RedState,SilverState
  ************************************************************************/
-#ifndef _STATE_H_
-#define _STATE_H_
+#ifndef _STATES_H_
+#define _STATES_H_
 
 #include <iostream>
+#include "stdlib.h"
+#include <typeinfo>
+#include "string.h"
 #include "context.h"
+
 using namespace std;
+class Account;
 
-class State
-{
+class States
+{	
 	public:
-		Account* GetAccount()
-		{
-			return this->account;
-		}
+		Account* GetAccount();
 
-		void SetAccount(Account* account)
-		{
-			this->account = account;
-		}
+		void SetAccount(Account* account);
 
-		double GetBalance()
-		{
-			return this->balance;
-		}
+		double GetBalance();
 
-		void SetBalance(double balance)
-		{
-			this->balance = balance;
-		}
-
-		void Initialize(double interest,double lowerLimit,double upperLimit)
-		{
-			this->interest = interest;
-			this->lowerLimit = lowerLimit;
-			this->upperLimit = upperLimit;
-		}
+		void SetBalance(double balance);
+		void Initialize(double interest,double lowerLimit,double upperLimit);
 	
-		virtual void Deposit(double amount)
-		{
-			this->balance += amount;
-		}
-		virtual void Withdraw(double amount)
-		{
-		}
+		virtual void Deposit(double amount);
+		virtual void Withdraw(double amount);
 		
-		virtual void PayInterest()
+		virtual void PayInterest();			
+
+		virtual void CoConstructor(double balance,Account *account)
 		{
 		}
 
-		virtual ~State()
+		virtual void PrintState()
 		{
-			if(account)
-			{
-				delete account;
-				account = NULL;
-			}
-		}
-
+		};
 	public:
 		Account *account;
 		double interest;
 		double balance;
-
-	protected:
 		double lowerLimit;
 		double upperLimit;
 };
 
-
-class GoldState:public State
+class GoldState:public States
 {
 	public:
-		GoldState( State *state)
-		{
-			this->balance = state->GetBalance();
-			this->account = state->GetAccount();
-			Initialize(0.05,1000,10000000);
-		}
+		GoldState( States *state);
+		GoldState(double balance,Account *account);	
 		
-		void Deposit(double amount)
-		{
-			this->balance += amount;
-			StateChangeCheck();
-		}
+		void CoConstructor(double balance,Account *account);
+		void Deposit(double amount);
 		
-		void Withdraw(double amount)
-		{
-			this->balance -= amount;
-			StateChangeCheck();
-		}
+		void Withdraw(double amount);
 
-		void PayInterest()
+		void PayInterest();
+		
+		
+		void PrintState()
 		{
-			balance += interest*balance;
-			StateChangeCheck();
+			cout<<"GoldState"<<endl;
 		}
-
 	private:
-		void StateChangeCheck()
-		{
-			if(balance < 0)
-				account->SetState(dynamic_cast<State*>(new RedState(this)));
-			else if(balance<lowerLimit)
-			{
-				account->SetState(dynamic_cast<State *>(new SilverState(this)));
-			}
-		}
+		void StateChangeCheck();
 
 };
 
-class RedState:public State
-{
+
+class RedState:public States{
 	public:
-		RedState( State *state)
-		{
-			this->balance = state->GetBalance();
-			this->account = state->GetAccount();
-			Initialize(0,-100,0);
-			this->serviceFee = 15;
-		}
-		
-		void Deposit(double amount)
-		{
-			this->balance += amount;
-			StateChangeCheck();
-		}
-		
-		void Withdraw(double amount)
-		{
-			amount -= serviceFee;
-			cout<<"sorry,this account has no balance to withdraw!"<<endl;
-		}
+		RedState( States *state);
+		RedState(double balance,Account *account);
+		void CoConstructor(double balance,Account *account);
 
-		void PayInterest()
+		void Deposit(double amount);
+		void Withdraw(double amount);
+		void PayInterest();
+		void PrintState()
 		{
+			cout<<"RedState"<<endl;
 		}
-
 	private:
-		void StateChangeCheck()
-		{
-			if(balance >upperLimit )
-				account->SetState( (State*)(new SilverState(this)));
-		}
+		void StateChangeCheck();
 	private:
 		double serviceFee;
 
 };
 
-class SilverState:public State
+
+class SilverState:public States
 {
 	public:	
-		SilverState( State* state)
-		{
-			this->balance = state->GetBalance();
-			this->account = state->GetAccount();
-			Initialize(0,0,1000);
-		}
+		SilverState( States* state);
+		SilverState(double balance,Account *account);
+		void CoConstructor(double balance,Account *account);
 		
-		void Deposit(double amount)
+		void PrintState()
 		{
-			this->balance += amount;
-			StateChangeCheck();
+			cout<<"SilverState"<<endl;
 		}
-		
-		void Withdraw(double amount)
-		{
-			this->balance -= amount;
-			StateChangeCheck();
-		}
-
-		void PayInterest()
-		{
-			balance += interest*balance;
-			StateChangeCheck();
-		}
+		void Deposit(double amount);
+		void Withdraw(double amount);
+		void PayInterest();
 
 	private:
-		void StateChangeCheck()
-		{
-			if(balance < lowerLimit)
-				account->SetState(dynamic_cast<State*>(new RedState(this)));
-			else if(balance>upperLimit)
-			{
-				account->SetState(dynamic_cast<State *>(new GoldState(this)));
-			}
-		}
+		void StateChangeCheck();
 };
 
 
